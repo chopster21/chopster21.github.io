@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chopster — Desktop Content Publishing Tool</title>
+<meta name="description" content="Chopster is a desktop tool that lets a creator prepare and publish their own original videos to their own TikTok account, using the official TikTok Content Posting API.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Chopster — Desktop Content Publishing Tool">
+<meta property="og:description" content="Prepare and publish your own original video content to your own TikTok account, from your own computer.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2322d3ee'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='bold' text-anchor='middle' fill='%2304121a'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#131820; --panel-2:#0f141b;
+    --fg:#e9edf2; --muted:#93a1b3; --accent:#22d3ee; --accent-2:#6366f1; --line:#222b36;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:16px/1.7 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  header.site{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.82);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;color:var(--fg);font-weight:650;letter-spacing:-.2px}
+  .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),#0ea5e9);color:#04121a;font-weight:800;font-size:17px}
+  nav.site a{color:var(--muted);font-size:14.5px;margin-left:20px}
+  nav.site a:hover{color:var(--fg);text-decoration:none}
+  nav.site a.on{color:var(--fg)}
+
+  .hero{padding:74px 0 46px;border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(900px 380px at 12% -12%,rgba(34,211,238,.15),transparent 62%),
+      radial-gradient(760px 360px at 92% -6%,rgba(99,102,241,.14),transparent 62%)}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.12;letter-spacing:-1.2px;margin:0 0 16px;max-width:19ch}
+  .lead{font-size:clamp(16.5px,2.1vw,19px);color:#c3ccd8;max-width:62ch;margin:0}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+  .badge{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);
+    border:1px solid var(--line);background:var(--panel-2);padding:7px 13px;border-radius:999px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:12px;
+    font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--panel);color:var(--fg);
+    transition:filter .15s ease,transform .15s ease}
+  .btn:hover{text-decoration:none;filter:brightness(1.1)}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),#0ea5e9);color:#04121a;border-color:transparent}
+
+  main{padding:52px 0 8px}
+  .eyebrow{font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
+  h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.6px;margin:0 0 8px}
+  .sub{color:var(--muted);margin:0 0 24px;max-width:70ch}
+  section.blk{margin:0 0 54px}
+
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+    border-radius:16px;padding:22px}
+  .card h3{margin:0 0 8px;font-size:16.5px;letter-spacing:-.2px}
+  .card p{margin:0;color:#b9c3d0;font-size:15px}
+  .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+    background:rgba(34,211,238,.11);border:1px solid rgba(34,211,238,.3);color:var(--accent)}
+  .ico svg{width:19px;height:19px}
+
+  .steps{counter-reset:s;display:grid;gap:13px;margin:0;padding:0;list-style:none}
+  .steps li{counter-increment:s;position:relative;padding:17px 22px 17px 64px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:14px}
+  .steps li::before{content:counter(s);position:absolute;left:16px;top:15px;width:32px;height:32px;
+    border-radius:9px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);
+    color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:15px}
+  .steps b{display:block;margin-bottom:2px}
+  .steps span{color:#b9c3d0;font-size:15px}
+
+  .legal{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .legal a{display:block;background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--line);border-radius:16px;padding:22px;color:var(--fg)}
+  .legal a:hover{border-color:#2f3d4d;text-decoration:none}
+  .legal strong{display:block;font-size:16.5px;margin-bottom:6px}
+  .legal em{display:block;font-style:normal;color:var(--muted);font-size:14.5px}
+  .legal .go{display:inline-block;margin-top:14px;color:var(--accent);font-size:14.5px;font-weight:600}
+
+  .note{border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--panel-2);border-radius:12px;padding:16px 20px;color:#c3ccd8;font-size:15px}
+
+  footer.site{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 54px;color:var(--muted);font-size:14.5px}
+  footer.site .cols{display:flex;flex-wrap:wrap;gap:14px 34px;justify-content:space-between;align-items:flex-start}
+  footer.site nav a{margin:0 18px 0 0;color:var(--muted)}
+  footer.site nav a:hover{color:var(--fg);text-decoration:none}
+  .fine{margin:22px 0 0;font-size:13.5px;line-height:1.65;max-width:78ch;color:#7f8b9b}
+  @media (max-width:620px){ nav.site a{margin-left:14px} .hero{padding:52px 0 36px} }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="mark">C</span> Chopster</a>
+    <nav class="site">
+      <a class="on" href="index.html">Overview</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Publish your own videos, to your own account, from your own computer.</h1>
+    <p class="lead">Chopster is a desktop tool for individual creators. It helps you prepare your own original
+      video content and publish it to your own TikTok account through TikTok's official Content Posting API.</p>
+    <div class="badges">
+      <span class="badge"><span class="dot"></span> Desktop application</span>
+      <span class="badge"><span class="dot"></span> Runs locally &amp; offline</span>
+      <span class="badge"><span class="dot"></span> No Chopster server</span>
+      <span class="badge"><span class="dot"></span> No analytics or tracking</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="privacy.html">Read our Privacy Policy</a>
+      <a class="btn" href="terms.html">Read our Terms of Service</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <section class="blk">
+      <p class="eyebrow">What Chopster is</p>
+      <h2>A publishing tool for creators, not a marketing platform</h2>
+      <p class="sub">Chopster is installed and run by the creator on their own device. It exists to remove the
+        repetitive manual steps between finishing a video and posting it, while leaving every decision in the
+        creator's hands.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+          <h3>Prepare</h3>
+          <p>The creator selects their own video file and writes their own caption, title and privacy choice
+            inside the app.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></div>
+          <h3>Publish</h3>
+          <p>Chopster sends that video to the creator's own TikTok account using the official TikTok
+            Content Posting API — never to anyone else's account.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Confirm</h3>
+          <p>The creator chooses whether uploads arrive as a draft in their own TikTok inbox for review,
+            or as a direct post they have authorised.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <p class="eyebrow">How it works</p>
+      <h2>Four steps, all started by the creator</h2>
+      <p class="sub">Nothing happens automatically or on someone else's behalf. Every publish action begins
+        with the account owner.</p>
+
+      <ol class="steps">
+        <li><b>Install and run Chopster</b><span>It runs on the creator's own Windows computer. No Chopster account is required to install it.</span></li>
+        <li><b>Connect a TikTok account</b><span>The creator signs in on TikTok's own website and approves the specific permissions Chopster requests. Chopster never sees or stores the password.</span></li>
+        <li><b>Select a video and confirm the details</b><span>The creator picks their own file, writes their own caption, and chooses the privacy setting.</span></li>
+        <li><b>Chopster delivers it to TikTok</b><span>The upload is sent to that creator's own account. In draft mode, the creator still presses Post themselves inside the TikTok app.</span></li>
+      </ol>
+    </section>
+
+    <section class="blk">
+      <p class="eyebrow">Your data</p>
+      <h2>Everything stays on the creator's own device</h2>
+      <p class="sub">Chopster operates no server and runs no cloud service, so there is nowhere for us to
+        collect your data even if we wanted to.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Locally stored only</h3>
+          <p>Access tokens, settings and job history are written to the user's own Windows profile. They are
+            never transmitted to us.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing is sold or shared</h3>
+          <p>No data is sold, rented, shared with advertisers, or used to train anything. There is no
+            analytics or telemetry in the app.</p>
+        </div>
+        <div class="card">
+          <h3>Revocable at any time</h3>
+          <p>Disconnecting the account inside Chopster deletes the stored tokens immediately, and access can
+            also be revoked from TikTok's own settings.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <p class="eyebrow">Legal documents</p>
+      <h2>Our Terms of Service and Privacy Policy</h2>
+      <p class="sub">These two documents describe the rules of use and exactly how information is handled.
+        Both are published in full on this site.</p>
+
+      <div class="legal">
+        <a href="terms.html">
+          <strong>Terms of Service</strong>
+          <em>The licence granted to you, your responsibilities as a creator, third-party platform terms, warranties and liability.</em>
+          <span class="go">Read the Terms →</span>
+        </a>
+        <a href="privacy.html">
+          <strong>Privacy Policy</strong>
+          <em>What information the app processes, where it is stored, how long it is kept, and how to have it deleted.</em>
+          <span class="go">Read the Privacy Policy →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="blk">
+      <p class="eyebrow">Scope of the integration</p>
+      <h2>Which TikTok features Chopster uses, and why</h2>
+      <div class="card">
+        <h3>Login Kit</h3>
+        <p>Used so the creator can authorise Chopster to act on their own account. Only
+          <code>user.info.basic</code> is requested, and solely to show which account is connected.</p>
+      </div>
+      <div style="height:14px"></div>
+      <div class="card">
+        <h3>Content Posting API — <code>video.upload</code></h3>
+        <p>Used to deliver the creator's own video into their own TikTok inbox as a draft. The creator
+          reviews it and taps Post inside the TikTok app. Chopster does not publish anything without the
+          creator's confirmation.</p>
+      </div>
+    </section>
+
+    <section class="blk">
+      <h2>Contact</h2>
+      <div class="note">
+        Questions about Chopster, these Terms, or how your data is handled?<br>
+        Email: <a href="mailto:Arisnanda980@gmail.com">Arisnanda980@gmail.com</a><br>
+        Developed by <strong>ARIS NANDA SAPUTRA</strong>.
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html"><span class="mark">C</span> Chopster</a>
+      </div>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:Arisnanda980@gmail.com">Contact</a>
+      </nav>
+    </div>
+    <p class="fine">
+      Chopster is an independent desktop application and is not affiliated with, endorsed by, sponsored by,
+      or in any way officially connected to TikTok or ByteDance. TikTok is a trademark of its respective owner.
+      Chopster contains no functionality intended to bypass platform security controls, authentication,
+      rate limits, or any other protective measure. All content is published by the account owner to the
+      account owner's own account.
+    </p>
+    <p class="fine">© 2026 ARIS NANDA SAPUTRA. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

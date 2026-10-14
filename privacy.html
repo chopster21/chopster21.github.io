@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Chopster</title>
+<meta name="description" content="How the Chopster desktop application processes and protects your information.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2322d3ee'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='bold' text-anchor='middle' fill='%2304121a'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#131820; --panel-2:#0f141b;
+    --fg:#e9edf2; --muted:#93a1b3; --accent:#22d3ee; --line:#222b36;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:16px/1.78 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  code{background:#0a0e13;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13.6px}
+
+  header.site{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.82);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:940px}
+  .brand{display:flex;align-items:center;gap:11px;color:var(--fg);font-weight:650;letter-spacing:-.2px}
+  .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),#0ea5e9);color:#04121a;font-weight:800;font-size:17px}
+  nav.site a{color:var(--muted);font-size:14.5px;margin-left:20px}
+  nav.site a:hover{color:var(--fg);text-decoration:none}
+  nav.site a.on{color:var(--fg)}
+
+  .dochead{padding:56px 0 30px;border-bottom:1px solid var(--line);
+    background:radial-gradient(760px 300px at 10% -30%,rgba(34,211,238,.13),transparent 62%)}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);
+    border:1px solid var(--line);background:var(--panel-2);padding:6px 13px;border-radius:999px;margin-bottom:16px}
+  h1{font-size:clamp(27px,4.4vw,38px);letter-spacing:-1px;margin:0 0 10px}
+  .dochead p{color:var(--muted);margin:0;max-width:66ch}
+
+  .highlight{margin:30px 0 6px;border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--panel-2);border-radius:14px;padding:20px 24px}
+  .highlight strong{display:block;font-size:15px;margin-bottom:6px}
+  .highlight p{margin:0;color:#c3ccd8;font-size:15px}
+
+  .toc{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin:24px 0 8px}
+  .toc strong{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+  .toc ol{margin:12px 0 0;padding-left:22px;columns:2;column-gap:34px}
+  .toc li{margin:5px 0;font-size:14.6px}
+  @media (max-width:640px){ .toc ol{columns:1} }
+
+  main{padding:8px 0 60px}
+  section.sec{margin:18px 0;padding:24px 26px;border:1px solid var(--line);border-radius:16px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));scroll-margin-top:80px}
+  section.sec h2{font-size:18.5px;letter-spacing:-.3px;margin:0 0 12px;display:flex;gap:12px;align-items:baseline}
+  section.sec h2 .n{color:var(--accent);font-size:14px;font-weight:700;min-width:20px;
+    border:1px solid rgba(34,211,238,.35);background:rgba(34,211,238,.1);border-radius:7px;
+    padding:2px 7px;line-height:1.4}
+  section.sec p{margin:0 0 12px;color:#c6cfdb}
+  section.sec p:last-child{margin-bottom:0}
+  section.sec ul{margin:0 0 12px;padding-left:22px;color:#c6cfdb}
+  section.sec li{margin:7px 0}
+  section.sec ul:last-child{margin-bottom:0}
+
+  table{border-collapse:collapse;width:100%;margin:6px 0 14px;font-size:14.6px}
+  caption{caption-side:top;text-align:left;color:var(--muted);font-size:13.6px;padding-bottom:8px}
+  th,td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top;color:#c6cfdb}
+  th{background:#161c25;color:var(--fg);font-weight:600;font-size:14px}
+  td:first-child{color:var(--fg);font-weight:500;width:31%}
+  .back{display:inline-block;margin-top:26px;font-size:14px;color:var(--muted)}
+  .back:hover{color:var(--fg)}
+
+  footer.site{border-top:1px solid var(--line);padding:32px 0 54px;color:var(--muted);font-size:14.5px}
+  footer.site nav a{margin:0 18px 0 0;color:var(--muted)}
+  footer.site nav a:hover{color:var(--fg);text-decoration:none}
+  .fine{margin:20px 0 0;font-size:13.5px;line-height:1.65;max-width:78ch;color:#7f8b9b}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="mark">C</span> Chopster</a>
+    <nav class="site">
+      <a href="index.html">Overview</a>
+      <a href="terms.html">Terms</a>
+      <a class="on" href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="dochead">
+  <div class="wrap">
+    <span class="pill">Legal document · Version 1.0</span>
+    <h1>Privacy Policy</h1>
+    <p>This policy explains what information the Chopster desktop application processes, why it processes it,
+      where that information is stored, and what control you have over it.</p>
+    <p style="margin-top:10px"><strong style="color:#e9edf2">Last updated:</strong> 15 October 2026</p>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <div class="highlight">
+      <strong>The short version</strong>
+      <p>Chopster runs entirely on your own computer. We operate no server and no cloud service, so we never
+        receive, collect, or hold your content, your tokens, or your personal data. Everything the app needs
+        stays on your device, and you can delete it at any time.</p>
+    </div>
+
+    <div class="toc">
+      <strong>Contents</strong>
+      <ol>
+        <li><a href="#p1">Who we are</a></li>
+        <li><a href="#p2">What we do not collect</a></li>
+        <li><a href="#p3">Information the app processes</a></li>
+        <li><a href="#p4">Why we process it</a></li>
+        <li><a href="#p5">Where it is stored</a></li>
+        <li><a href="#p6">Sharing and transfers</a></li>
+        <li><a href="#p7">Retention and deletion</a></li>
+        <li><a href="#p8">Your rights and choices</a></li>
+        <li><a href="#p9">Security</a></li>
+        <li><a href="#p10">Analytics and tracking</a></li>
+        <li><a href="#p11">Children</a></li>
+        <li><a href="#p12">Changes to this policy</a></li>
+        <li><a href="#p13">Contact</a></li>
+      </ol>
+    </div>
+
+    <section class="sec" id="p1">
+      <h2><span class="n">1</span> Who we are</h2>
+      <p>Chopster is a desktop application developed by <strong>ARIS NANDA SAPUTRA</strong> ("we", "us",
+        "the developer"). This policy applies to the Chopster application and to this website.</p>
+      <p>For the purposes of applicable data protection law, the developer named above is the party
+        responsible for the application. However, because the application runs locally on your device and we
+        receive no data from it, we do not hold any personal data about you.</p>
+    </section>
+
+    <section class="sec" id="p2">
+      <h2><span class="n">2</span> What we do not collect</h2>
+      <p>To be unambiguous, we do <strong>not</strong> collect, receive or have access to:</p>
+      <ul>
+        <li>your TikTok password or login credentials;</li>
+        <li>the videos, captions or other content you process with the application;</li>
+        <li>your usage history, job records or log files, which remain on your device;</li>
+        <li>your IP address, device identifiers, or browsing behaviour;</li>
+        <li>any analytics, crash reports or telemetry.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="p3">
+      <h2><span class="n">3</span> Information the app processes</h2>
+      <p>The application processes the following information locally in order to function:</p>
+      <table>
+        <caption>Categories of data processed by the application, and their purpose.</caption>
+        <tr>
+          <th>Category</th><th>Examples</th><th>Purpose</th>
+        </tr>
+        <tr>
+          <td>Platform authorisation data</td>
+          <td>OAuth access token, refresh token, token expiry, account identifier issued by the platform</td>
+          <td>To carry out the publishing action you explicitly authorised</td>
+        </tr>
+        <tr>
+          <td>Basic profile information</td>
+          <td>Display name and account handle of the connected account</td>
+          <td>Only so you can confirm which account is connected</td>
+        </tr>
+        <tr>
+          <td>Your content</td>
+          <td>Video files, captions, titles, privacy settings that you choose</td>
+          <td>To prepare and deliver that content on your instruction</td>
+        </tr>
+        <tr>
+          <td>Local application data</td>
+          <td>Settings, job history, local log files and diagnostic screenshots</td>
+          <td>So the application works correctly and so you can review what it did</td>
+        </tr>
+      </table>
+      <p>The application does not request any profile data beyond what is needed to display the connected
+        account. It requests no email address, no follower lists, no direct messages and no contact data.</p>
+    </section>
+
+    <section class="sec" id="p4">
+      <h2><span class="n">4</span> Why we process it</h2>
+      <p>The application processes the information above solely to perform the action you instructed it to
+        perform — that is, to publish your own content to your own account — and to remember your settings
+        between sessions.</p>
+      <p>Where data protection law requires a legal basis, the basis is your consent, given expressly when
+        you authorise the connection between the application and your platform account, and you may withdraw
+        that consent at any time.</p>
+    </section>
+
+    <section class="sec" id="p5">
+      <h2><span class="n">5</span> Where it is stored</h2>
+      <p>All of the information described above is stored <strong>locally on your own device</strong>, within
+        your Windows user profile — typically under a folder such as
+        <code>%APPDATA%&#92;ChopsterByAris</code>.</p>
+      <p>We operate no server, no database and no cloud storage for this application. Consequently, no copy
+        of your data exists on our side, and there is no transfer of your data to us.</p>
+    </section>
+
+    <section class="sec" id="p6">
+      <h2><span class="n">6</span> Sharing and transfers</h2>
+      <p>We do not sell, rent, trade or otherwise share your information with anyone. We do not share data
+        with advertisers, data brokers or business partners, and we do not use your data to train any model.</p>
+      <p>The only outbound network communication the application performs is the direct connection between
+        your device and the platform you authorised (for example, the official TikTok API endpoints). That
+        connection exists only to carry out the publishing action you requested and is governed by that
+        platform's own privacy policy.</p>
+    </section>
+
+    <section class="sec" id="p7">
+      <h2><span class="n">7</span> Retention and deletion</h2>
+      <p>Because data is stored locally, retention is entirely under your control:</p>
+      <ul>
+        <li><strong>Disconnecting an account</strong> inside the application immediately deletes the stored
+          access token and associated session data for that account.</li>
+        <li><strong>Revoking access</strong> from your TikTok account settings immediately prevents any
+          further action by the application on that account.</li>
+        <li><strong>Uninstalling the application</strong> and deleting its local data folder removes all
+          remaining settings, history and logs from your device permanently.</li>
+        <li>Since we hold no copy of your data, there is nothing for us to erase on our side.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="p8">
+      <h2><span class="n">8</span> Your rights and choices</h2>
+      <p>Depending on where you live, you may have rights to access, correct, delete, restrict or object to
+        the processing of your personal data, and to data portability. Because we hold no personal data
+        about you, these rights are effectively exercised directly by you on your own device.</p>
+      <p>You can exercise them at any time by inspecting, editing or deleting the application's local data
+        folder, or by disconnecting the connected account. If you have any question about how to do this, you
+        are welcome to contact us using the details in section 13.</p>
+    </section>
+
+    <section class="sec" id="p9">
+      <h2><span class="n">9</span> Security</h2>
+      <p>Your data is protected by the security of your own device and your Windows user account. We
+        recommend that you use a device you trust, keep your operating system and browser updated, and
+        protect your user account with a strong password.</p>
+      <p>All network communication with platform APIs is carried out over encrypted HTTPS connections. No
+        credentials are ever transmitted to us.</p>
+    </section>
+
+    <section class="sec" id="p10">
+      <h2><span class="n">10</span> Analytics and tracking</h2>
+      <p>The application contains no analytics, no advertising, no tracking pixels, and no telemetry of any
+        kind. This website contains no cookies and no third-party scripts; it is a set of static pages that
+        do nothing but display text.</p>
+    </section>
+
+    <section class="sec" id="p11">
+      <h2><span class="n">11</span> Children</h2>
+      <p>The application is not intended for use by children under the minimum age required to hold a social
+        media account in their jurisdiction. We do not knowingly process data relating to such children.</p>
+    </section>
+
+    <section class="sec" id="p12">
+      <h2><span class="n">12</span> Changes to this policy</h2>
+      <p>We may update this Privacy Policy from time to time. The current version will always be published on
+        this page with a revised "Last updated" date. Material changes will be reflected in a new version
+        number.</p>
+    </section>
+
+    <section class="sec" id="p13">
+      <h2><span class="n">13</span> Contact</h2>
+      <p>If you have any question about this Privacy Policy or about how your information is handled, please
+        contact us at <a href="mailto:Arisnanda980@gmail.com">Arisnanda980@gmail.com</a>.</p>
+      <a class="back" href="index.html">← Back to overview</a>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:Arisnanda980@gmail.com">Contact</a>
+    </nav>
+    <p class="fine">© 2026 ARIS NANDA SAPUTRA. Chopster is an independent application and is not
+      affiliated with, endorsed by or sponsored by TikTok or ByteDance. TikTok is a trademark of its
+      respective owner.</p>
+  </div>
+</footer>
+
+</body>
+</html>
